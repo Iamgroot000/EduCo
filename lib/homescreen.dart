@@ -1,11 +1,27 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:nextapp/secondcardreelsviewer.dart';
+import 'package:nextapp/krishankishorevideosa.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+import 'package:widget_circular_animator/widget_circular_animator.dart';
+
+import 'collabaration.dart';
+import 'firebase_options.dart';
+import 'krishankishorebhandariprofile.dart';
+import 'kbtutorials.dart';
 import 'contactscode.dart';
 import 'drawer/code.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -17,11 +33,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green, // Change this to your desired color
       ),
-      home: HomePage(),
-      debugShowCheckedModeBanner: false,
+      // home: Column(
+      //   children: [
+      //     InstagramStoryList(), // Instagram Story Icons
+      //     Expanded(
+      //       child: VideoList(),
+      //     ),
+      //   ],
+      // ),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     padding: EdgeInsets.zero,
+      //     children: [
+      //       // Drawer items...
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
+//       debugShowCheckedModeBanner: false,
+//     );
+//   }
+// }
 
 class HomePage extends StatelessWidget {
   @override
@@ -57,55 +91,224 @@ class HomePage extends StatelessWidget {
         elevation: 0.00,
         backgroundColor: Colors.greenAccent[400],
       ), //AppBar
-      body: VideoList(),
-    drawer: Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
+      body: Column(
         children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.greenAccent[400],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.white,
-                  // Add your profile image here
-                  backgroundImage: AssetImage('assests/pakistan.png'),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'I am Groot',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
+          InstagramStoryList(), // Instagram Story Icons
+          Expanded(
+            child: VideoList(),
           ),
-          ListTile(
-            title: Text('Item 1'),
-            onTap: () {
-              Get.to(contacts());
-              // Handle item 1 tap
-            },
-          ),
-          ListTile(
-            title: Text('Item 2'),
-            onTap: () {
-              // Handle item 2 tap
-            },
-          ),
-          // Add more ListTile items for your menu
         ],
       ),
+    drawer:
+    Drawer(
+    child: ListView(
+    padding: EdgeInsets.zero,
+    children: [
+    DrawerHeader(
+    decoration: BoxDecoration(
+    color: Colors.yellow[400],
     ),
-    );//Center
-     //Scaffold
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+       WidgetCircularAnimator(
+        size: 100,
+        innerIconsSize: 3,
+        outerIconsSize: 3,
+        innerAnimation: Curves.easeInOutBack,
+        outerAnimation: Curves.easeInOutBack,
+        innerColor: Colors.red,
+        outerColor: Colors.green,
+        innerAnimationSeconds: 10,
+        outerAnimationSeconds: 10,
+        child: ClipOval(
+          child: Image.asset(
+            'assests/gaurav.jpg',
+            width: 250,
+            height: 250,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+    SizedBox(height: 10),
+    Text(
+    ''' GrootX/  ''',
+    style: TextStyle(
+    color: Colors.green,
+      fontWeight: FontWeight.bold,
+      fontSize: 18,
+    ),
+    ),
+    ],
+    ),
+    ),
+    SizedBox(height: 20,),
+    Container(
+
+
+    ),
+
+    SizedBox(height: 10,),
+
+
+
+    SizedBox(height: 150,),
+    Container(
+    height: 65,
+    child:
+    CircularButton(
+    color: Colors.blue,
+    icon: Icons.message,
+    onPressed: () async {
+    final phoneNumber = "7536868981"; // Replace with your phone number
+
+    final url = 'sms:$phoneNumber';  // This URL scheme opens the messaging app with your phone number pre-filled
+
+    if (await canLaunch(url)) {
+    await launch(url);
+    } else {
+    // Handle the error, e.g., by showing an error message to the user
+    print('Could not launch $url');
+    }
+    },
+    ),
+    ),
+    SizedBox(height: 30,),
+    Container(
+    height: 65,
+    child:
+    CircularButton(
+    color: Colors.blue,
+    icon: Icons.facebook,
+    onPressed: () async {
+    final facebookPageUrl = "https://www.facebook.com/gaurav.parmar.56211497?mibextid=ZbWKwL"; // Replace with your Facebook page URL
+
+    if (await canLaunch(facebookPageUrl)) {
+    await launch(facebookPageUrl);
+    } else {
+    // Handle the error, e.g., by showing an error message to the user
+    print('Could not launch $facebookPageUrl');
+    }
+    },
+
+    ),
+
+    ),
+      SizedBox(
+        height: 20,
+      ),
+      InkWell(
+        onTap: () {
+          // Handle onTap event here
+        },
+        child: CircleAvatar(
+          radius: 40, // Set the radius to half of your desired width/height
+          //backgroundColor: Colors.green, // Background color of the circular avatar
+          child: Center(
+            child: ClipOval(
+              child: Image.asset(
+                'assests/whatsa.png', // Corrected image asset path
+                width: 80, // Set the width and height to match the CircleAvatar's radius * 2
+                height: 80,
+                fit: BoxFit.cover, // This ensures the image covers the entire circle
+              ),
+            ),
+          ),
+        ),
+      ),
+      SizedBox(height: 20,),
+      InkWell(
+        onTap: () {
+          // Handle onTap event here
+        },
+        child: CircleAvatar(
+          radius: 40, // Set the radius to half of your desired width/height
+          //backgroundColor: Colors.green, // Background color of the circular avatar
+          child: Center(
+            child: ClipOval(
+              child: Image.asset(
+                'assests/instagram.png', // Corrected image asset path
+                width: 80, // Set the width and height to match the CircleAvatar's radius * 2
+                height: 80,
+                fit: BoxFit.cover, // This ensures the image covers the entire circle
+              ),
+            ),
+          ),
+        ),
+      ),
+      SizedBox(height: 169,),
+
+      InkWell(
+        onTap: (){
+          Get.to(CollaborationPage());
+        },
+        child: Container(
+          height: 50,
+          width: 20,
+          decoration: BoxDecoration(
+            color: Colors.red,
+             borderRadius: BorderRadius.circular(20),
+            // border: Border.all(
+               //color: Colors.red, // Specify the border color here
+              // width: 2.0,
+        ),
+
+
+          child: Center(
+            child: Text(
+              'Collaborate With Us',
+              style: TextStyle(
+                fontSize: 18,                // Adjust the font size as needed
+                color: Colors.white,          // Change the text color
+                fontWeight: FontWeight.bold, // Specify the font weight
+                // fontStyle: FontStyle.italic, // Specify the font style (e.g., italic)
+                letterSpacing: 1.2,          // Adjust letter spacing
+                // decoration: TextDecoration.underline, // Add text decoration (e.g., underline)
+                decorationColor: Colors.red,           // Specify decoration color
+                //decorationThickness: 2.0,             // Specify decoration thickness
+              ),
+            ),
+          ),
+        ),
+      )  ,
+
+    ] ),
+
+    ),
+    // SizedBox(height: 40,),
+    // Expanded(
+    // child: Container(
+    // child: Column(
+    // mainAxisAlignment: MainAxisAlignment.center,
+    // children: [
+    // Text("Rate My App"),
+    // RatingBar.builder(
+    // initialRating: 0,
+    // minRating: 1,
+    // direction: Axis.horizontal,
+    // allowHalfRating: false,
+    // itemCount: 5,
+    // itemSize: 40,
+    // itemBuilder: (context, _) => Icon(
+    // Icons.star,
+    // color: Colors.amber,
+    // ),
+    // onRatingUpdate: (rating) {
+    // // Handle the rating update here, e.g., send it to a server.
+    // print(rating);
+    // },
+    // ),
+    // ],
+    // ),
+    // ),
+    // )
+
+
+
+
+     //Center
+    );  //Scaffold
   }
 }
 
@@ -131,139 +334,226 @@ class VideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Get.to(VideoPage(video: video));
-      },
-      child: Container(
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () {
+           // Get.to(VideoPage(video: video));
+           Get.to(VideoPlayerApp());
+           // _loadVideosFromStorage();
 
-        margin: EdgeInsets.all(12.0),
-        padding: EdgeInsets.all(12.0),
-        decoration: BoxDecoration(
-          color: Colors.yellowAccent,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AspectRatio(
-              aspectRatio: 16 / 9,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Image.asset(
-                  'assests/mathsgo.jpg', // Replace with the actual path to your local image
-                  width: double.infinity,
-                  height: 200.0,
-                  fit: BoxFit.cover,
+          },
+          child: Container(
+
+            margin: EdgeInsets.all(12.0),
+            padding: EdgeInsets.all(12.0),
+            decoration: BoxDecoration(
+              color: Colors.yellow,
+              borderRadius: BorderRadius.circular(10.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
                 ),
-              ),
-
+              ],
             ),
-            SizedBox(height: 10.0),
-            Text(
-              video.title,
-              style: TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 5.0),
-            Text(
-              video.description,
-              style: TextStyle(
-                fontSize: 14.0,
-                color: Colors.grey,
-              ),
-            ),
-
-
-          ],
-
-        ),
-
-      ),
-
-    );
-  }
-}
-
-class VideoPage extends StatelessWidget {
-  final Video video;
-
-  VideoPage({required this.video});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(video.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AspectRatio(
-              aspectRatio: 16 / 9,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 3),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.asset(
+                      'assests/mathsgo.jpg', // Replace with the actual path to your local image
+                      width: double.infinity,
+                      height: 200.0,
+                      fit: BoxFit.cover,
                     ),
-                  ],
+                  ),
+
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  // child: Image.network(
-                  //   // video.thumbnailUrl,
-                  //   // fit: BoxFit.cover,
-                  // ),
+                SizedBox(height: 10.0),
+                Text(
+                  video.title,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-
-            ),
-            SizedBox(height: 20.0),
-            Text(
-              video.title,
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              video.description,
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.grey,
-              ),
-            ),
-            SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
+                SizedBox(height: 5.0),
+                Text(
+                  video.description,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.grey,
+                  ),
+                ),
 
 
-              },
-              child: Text('Play Video'),
+              ],
+
             ),
-          ],
+
+
+
+          ),
+
+
         ),
-      ),
+        Column(
+            children: [
+
+          GestureDetector(
+            onTap: () {
+            // Get.to(VideoPlayersecondApp());
+
+            },
+            child: Container(
+
+              margin: EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(12.0),
+              decoration: BoxDecoration(
+                color: Colors.yellow,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.asset(
+                        'assests/taton-moise-zWQ7zsBr5WU-unsplash.jpg', // Replace with the actual path to your local image
+                        width: double.infinity,
+                        height: 200.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+
+                  ),
+                  SizedBox(height: 10.0),
+                  Text(
+                    video.title,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 5.0),
+                  Text(
+                    video.description,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.grey,
+                    ),
+                  ),
+
+
+                ],
+
+              ),
+
+
+
+
+            ),
+
+
+          ),
+
+       ] ),
+        Column(
+            children: [
+
+              GestureDetector(
+                onTap: () {
+                // Get.to(dkinstavideos());
+
+                },
+                child: Container(
+
+                  margin: EdgeInsets.all(12.0),
+                  padding: EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                    color: Colors.yellow,
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Image.asset(
+                            'assests/newton.jpg', // Replace with the actual path to your local image
+                            width: double.infinity,
+                            height: 200.0,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+
+                      ),
+                      SizedBox(height: 10.0),
+                      Text(
+                        video.title,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 5.0),
+                      Text(
+                        video.description,
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                        ),
+                      ),
+
+
+                    ],
+
+                  ),
+
+
+
+
+                ),
+
+
+              ),
+
+            ] ),
+
+      ],
+
     );
+
+
   }
 }
+
 
 class Video {
   final String title;
@@ -277,19 +567,100 @@ class Video {
   });
 }
 
+
 List<Video> videoData = [
   Video(
     title: 'Mathematics Basics',
     description: 'Learn the fundamentals of mathematics.',
-    thumbnailUrl: 'https://youtu.be/wtHBsvj2QKA?si=JEgd-j3TDY9kBMhs',
+    thumbnailUrl: 'https://youtu.be/Y_oVpYQaGFs?si=TtNAiwKqmp6nkAZw',
   ),
-  Video(
-    title: 'History of Science',
-    description: 'Explore the history of scientific discoveries.',
-    thumbnailUrl: 'https://example.com/history_thumbnail.jpg',
-  ),
+  // Video(
+  //   title: 'History of Science',
+  //   description: 'Explore the history of scientific discoveries.',
+  //   thumbnailUrl: 'https://example.com/history_thumbnail.jpg',
+  // ),
+  // Video(
+  //   title: 'History of Groot',
+  //   description: 'Explore the Guardians of Galaxy.',
+  //   thumbnailUrl: 'https://example.com/history_thumbnail.jpg',
+  // ),
   // Add more videos to the list
 ];
+
+class InstagramStoryList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100, // Adjust the height as needed
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 2, // Two stories/icons
+        itemBuilder: (context, index) {
+          // Define different CircleAvatar and InkWell properties for each story
+          Widget circleAvatar;
+          if (index == 0) {
+            // First story
+            circleAvatar = InkWell(
+              onTap: () {
+
+                Fluttertoast.showToast(
+                    msg: "This is the profile of Krishna kishore bhandari", // Your toast message
+                    toastLength: Toast.LENGTH_SHORT, // You can change the duration
+                    gravity: ToastGravity.CENTER, // You can change the position
+                   // timeInSecForIosWeb: 2, // You can change the duration on iOS/Web
+                    backgroundColor: Colors.black, // You can change the background color
+                    textColor: Colors.white,
+                );
+
+                Get.to(KK());
+              },
+              child: CircleAvatar(
+                radius: 42, // Adjust the image size as needed
+                backgroundImage: AssetImage('assests/dp1.jpg'), // Replace with your image asset path
+              ),
+            );
+          } else {
+            // Second story
+            circleAvatar = InkWell(
+              onTap: () {
+                // Handle the onTap action for the second story
+              },
+              child: CircleAvatar(
+                radius: 42, // Adjust the image size as needed
+                backgroundImage: AssetImage('assests/dp1.jpg'), // Replace with your image asset path
+              ),
+            );
+          }
+
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 80, // Adjust the icon size as needed
+                  height: 80, // Adjust the icon size as needed
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.green,
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+                circleAvatar,
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+
+
+
 
 
 
